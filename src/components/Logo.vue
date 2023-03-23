@@ -1,12 +1,17 @@
 <template>
-  <a class="logo object-fit" href="/">
+  <router-link :to="{name: 'main'}" class="logo object-fit" href="/">
     <img src="../assets/logo.svg" alt="logo"/>
-  </a>
+  </router-link>
 </template>
 
 <script>
+import {RouterLink} from "vue-router";
+
 export default {
-  name: "LogoComponent"
+  name: "LogoComponent",
+  components: {
+    RouterLink
+  }
 }
 </script>
 

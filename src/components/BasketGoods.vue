@@ -1,5 +1,5 @@
 <template>
-  <div class="goods">
+  <div class="goods" v-if="basket.length">
       <div class="goods_head">Постачальник: <span>Lorem Ipsum</span></div>
       <ul class="goods-list" v-for="cart of basket" :key="cart.id">
         <li class="goods-item _f">
@@ -33,7 +33,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

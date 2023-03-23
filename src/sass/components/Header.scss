@@ -7,10 +7,14 @@
   top: 0;
   box-shadow: 0 4px 15px rgba(22, 25, 31, 0.1);
 
+  &_logo {
+    margin-right: 16px;
+  }
+
   &_search {
     display: block;
     width: 100%;
-    padding: 12.5px 16px 12.5px 19px;
+    padding: 12.5px 40px 12.5px 19px;
     border-radius: 30px;
     border: 1px solid #E5EAEF;
     margin-right: 8px;

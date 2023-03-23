@@ -1,7 +1,7 @@
 <template>
   <div class="popup_shadow _f _j-center _i-center" :class="{active: isOpenPopup}" @click="closePopup">
     <div class="popup" >
-        <Logo style="margin: 0 auto 16px"/>
+        <Logo class="popup_logo" />
         <div class="popup_description">
           Соцмережа постачальників та покупців для покупки товарів та обміну відгуками:
         </div>

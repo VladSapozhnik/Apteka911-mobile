@@ -7,6 +7,9 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 140%;
+  &_logo {
+    margin: 0 auto 16px
+  }
   &_description,
   &-benefits {
     margin-bottom: 8px;

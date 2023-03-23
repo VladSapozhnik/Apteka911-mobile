@@ -1,4 +1,5 @@
 <template>
+  <Header/>
   <main class="main">
     <div class="container _f _f-column _h-100">
       <div class="_f _j-between _i-center _mb-25">
@@ -12,27 +13,26 @@
       <Info />
       <Menu />
       <Popup />
-      <Ordering />
     </div>
   </main>
 </template>
 
 
 <script>
+import Header from "@/components/Header.vue";
 import Carts from "@/components/CartsSlider.vue";
 import Info from "@/components/Info.vue";
 import Menu from "@/components/Menu.vue";
 import Popup from "@/components/Popup.vue";
-import Ordering from "@/components/Basket.vue";
 
 export default {
   name: "MainContainer",
   components: {
+    Header,
     Carts,
     Info,
     Menu,
     Popup,
-    Ordering,
   },
   setup() {
 

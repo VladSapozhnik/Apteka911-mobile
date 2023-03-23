@@ -1,10 +1,10 @@
 <template>
-  <div class="basket" :class="{active : isOpen}">
+  <div class="basket">
     <div class="basket-header">
-      <Logo style="margin: 0 auto" />
+      <Logo />
     </div>
     <div class="contacts">
-      <div class="contacts_back" @click="closeBasket">Кошик</div>
+      <router-link :to="{name: 'main'}" class="contacts_back" @click="closeBasket">Кошик</router-link>
       <h2 class="contacts_title">Оформлення замовлення</h2>
       <h3 class="contacts_subtitle">Контактні дані</h3>
       <form action="" @submit.prevent="handlerForm">
@@ -59,6 +59,7 @@ import {computed, reactive} from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers, maxLength } from '@vuelidate/validators'
 import {useStore} from "vuex";
+import {RouterLink} from "vue-router";
 import BasketGoods from "@/components/BasketGoods.vue";
 
 
@@ -66,7 +67,8 @@ export default {
   name: "BasketComponent",
   components: {
     BasketGoods,
-    Logo
+    Logo,
+    RouterLink
   },
   setup() {
     const formData = reactive({
@@ -88,7 +90,7 @@ export default {
     }
 
     const isCyrillic = (value) => {
-      const regexp = /[а-яё]+/i;
+      const regexp = /[\u0400-\u04ff]+/gi ;
       return regexp.test(value);
     }
 
@@ -124,7 +126,7 @@ export default {
       if (result) {
         closeBasket();
       } else {
-        alert('error from')
+        alert('Введіть обов\'язкові поля')
       }
     }
 

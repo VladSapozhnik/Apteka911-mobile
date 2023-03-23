@@ -1,17 +1,18 @@
 <template>
-  <Header/>
-  <Main />
+<!--  <Main />-->
+  <router-view/>
+<!--  <Basket />-->
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-import Main from "@/components/Main.vue";
+// import Main from "@/components/Main.vue";
+// import Basket from "@/components/Basket.vue";
 
 export default {
   name: 'App',
   components: {
-    Header,
-    Main
+    // Main,
+    // Basket
   },
   setup() {
 
