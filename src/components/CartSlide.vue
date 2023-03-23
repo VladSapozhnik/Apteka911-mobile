@@ -10,7 +10,7 @@
         <div class="cart-price_prev" v-if="cart.prevPrice">{{ cart.prevPrice }} грн</div>
         <div class="cart-price_current" :class="{active: cart.prevPrice}">{{ cart.currentPrice }} грн</div>
       </div>
-      <div class="cart_basket object-fit" @click="onSubmit(cart)">
+      <div class="cart_basket object-fit" @click="onSubmit(cart)" :class="{active: !isAddToCart}">
         <img v-if="!isAddToCart" src="../assets/basketCart.svg" alt="basket cart">
         <img v-else src="../assets/basketActive.svg" alt="basket cart">
       </div>
@@ -23,16 +23,23 @@
 
 <script>
 import {ref} from "vue";
+import basket from "@/components/Basket.vue";
 
 export default {
   name: "CartSlide",
+  computed: {
+    basket() {
+      return basket
+    }
+  },
   props: {
     cart: Object,
   },
   setup(props, context) {
     const isAddToCart = ref(false);
     const onSubmit = (cart) => {
-      isAddToCart.value = true;
+      console.log(cart)
+      isAddToCart.value = !isAddToCart.value;
       context.emit('addCartToBasket', cart);
     }
 

@@ -45,7 +45,7 @@
             Всього до сплати: <span class="confirm-price_count">{{basketTotalPrice}}</span><span class="confirm-price_currency"> грн</span>
           </div>
           <div class="confirm_number">В кошику {{numberCarts}} товари</div>
-          <button class="confirm_btn" type="submit">Підтверджую замовлення</button>
+          <button class="confirm_btn" :disabled="numberCarts > 0 ? false : true" type="submit">Підтверджую замовлення</button>
         </div>
       </form>
       <BasketGoods />
@@ -82,8 +82,6 @@ export default {
     const numberCarts = computed(() => store.getters.BASKET_CART_COUNT);
     const basketTotalPrice = computed(() => store.getters.BASKET_TOTAL_PRICE);
 
-    const closeBasket = () => store.commit('UPDATE_IS_OPEN_BASKET', false);
-    const isOpen = computed(() => store.getters.IS_OPEN_BASKET);
     const phoneValidator = (value) => {
       const regexp = /^(\+38|38|8)?0[0-9]{9}$/;
       return regexp.test(value);
@@ -123,9 +121,7 @@ export default {
     const v$ = useVuelidate(rules, formData)
     const handlerForm = async () => {
       const result = await v$.value.$validate();
-      if (result) {
-        closeBasket();
-      } else {
+      if (!result) {
         alert('Введіть обов\'язкові поля')
       }
     }
@@ -134,10 +130,8 @@ export default {
       formData,
       v$,
       handlerForm,
-      closeBasket,
       numberCarts,
       basketTotalPrice,
-      isOpen
     }
   }
 }

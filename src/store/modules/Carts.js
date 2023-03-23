@@ -14,20 +14,16 @@ export default {
             }, 3000)
         },
         UPDATE_BASKET(state, basket) {
-            const findPrice = (price) => price.prevPrice !== 0 ? price.prevPrice : price.currentPrice;
-
             let found = state.basketArray.find(product => product.id === basket.id);
 
             if (found) {
-                found.quantity++;
-                found.totalPrice = found.quantity * findPrice(found);
+                state.basketArray = state.basketArray.filter(item => item.id !== basket.id);
+                state.cartCount > 0 ? state.cartCount-- : 0;
             } else {
                 state.basketArray.push(basket);
                 basket['quantity'] = 1;
-                basket['totalPrice'] = findPrice(basket);
+                state.cartCount++;
             }
-            console.log(state.basketArray)
-            state.cartCount++;
         }
     },
     actions: {
@@ -55,7 +51,7 @@ export default {
         },
         BASKET_TOTAL_PRICE(state) {
             let total = state.basketArray.reduce((acc, item) => {
-                acc += item.totalPrice;
+                acc += item.currentPrice;
                 return acc;
             }, 0)
 
