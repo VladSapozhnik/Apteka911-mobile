@@ -10,10 +10,7 @@
         <div class="cart-price_prev" v-if="cart.prevPrice">{{ cart.prevPrice }} грн</div>
         <div class="cart-price_current" :class="{active: cart.prevPrice}">{{ cart.currentPrice }} грн</div>
       </div>
-      <div class="cart_basket object-fit" @click="onSubmit(cart)" :class="{active: !isAddToCart}">
-        <img v-if="!isAddToCart" src="../assets/basketCart.svg" alt="basket cart">
-        <img v-else src="../assets/basketActive.svg" alt="basket cart">
-      </div>
+      <div class="cart_basket" @click="onSubmit(cart)" :class="{active: !isAddToCart}"></div>
     </div>
     <div class="cart_is-stock">
       <span v-if="cart.isStock">Є в наявності</span>
@@ -35,10 +32,10 @@ export default {
   props: {
     cart: Object,
   },
+  emits: ["addCartToBasket"],
   setup(props, context) {
     const isAddToCart = ref(false);
     const onSubmit = (cart) => {
-      console.log(cart)
       isAddToCart.value = !isAddToCart.value;
       context.emit('addCartToBasket', cart);
     }

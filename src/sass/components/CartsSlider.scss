@@ -7,6 +7,11 @@
   position: relative !important;
   padding-bottom: 24px !important;
   margin-bottom: 16px;
+  .swiper-wrapper {
+    @media(max-height:850px) {
+      flex-wrap: inherit !important;
+    }
+  }
   .swiper-pagination {
     bottom: 0 !important;
   }
@@ -69,11 +74,32 @@
     }
   }
 
+  .swiper-container-multirow-column > .swiper-wrapper {
+
+    //flex-direction: inherit;
+  }
+
+  //.swiper-wrapper {
+  //  background-color: #FF1D1D !important;
+  //  /* flex-wrap: wrap; */
+  //  @media(max-height:850px) {
+  //    .video-contain{
+  //      margin-top:110px;
+  //    }
+  //  }
+  //}
+
   &_basket {
     width: 27px;
     height: 27px;
     margin-bottom: 8px;
     cursor: pointer;
+    background: url("@/assets/basketActive.svg") no-repeat center;
+    background-size: contain;
+    &.active {
+      background: url("@/assets/basketCart.svg") no-repeat center;
+      background-size: contain;
+    }
   }
 
   &_is-stock {
