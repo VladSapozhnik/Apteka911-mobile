@@ -1,5 +1,4 @@
-<template ref="headline">
-  {{windowSize}} {{rowSlides}}
+<template>
     <swiper
         v-if="pending"
         class="carts"
@@ -17,7 +16,7 @@
         :navigation="{
           prevEl: '.swiper-button-prev',
           nextEl: '.swiper-button-next',
-      }"
+        }"
     >
       <swiper-slide v-for="cart of carts" :key="cart.id" class="cart">
         <CartSlide :cart="cart" @addCartToBasket="addCartToBasket" />
@@ -32,7 +31,7 @@
 import CartSlide from "@/components/CartSlide.vue";
 
 import {useStore} from "vuex";
-import {computed, ref, onMounted, getCurrentInstance} from "vue";
+import {computed, ref, onMounted} from "vue";
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import 'swiper/css';
 import "swiper/css/grid";
@@ -49,24 +48,19 @@ export default {
   setup() {
     const store = useStore();
 
-    const { ctx } = getCurrentInstance();
-
     const pending = computed(() => store.getters.IS_LOADING);
     const carts = computed(() => store.getters.CARTS_RESULT);
-    const headline = ref(null);
-
 
     const windowSize = ref(window.innerHeight);
-    const rowSlides = ref( windowSize.value > 800 ? 2 : 1);
+    const rowDoubleHeight = 800;
+    const rowSlides = ref( windowSize.value > rowDoubleHeight ? 2 : 1);
 
     onMounted(() => {
       window.addEventListener('resize', () => {
-        let wHeight =  window.innerHeight
-        windowSize.value = window.innerHeight
+        let wHeight =  window.innerHeight;
 
-        if (wHeight > 845) rowSlides.value = 2;
+        if (wHeight > rowDoubleHeight) rowSlides.value = 2;
         else rowSlides.value = 1;
-        ctx.$forceUpdate();
       })
     })
 
@@ -81,8 +75,6 @@ export default {
       carts,
       pending,
       rowSlides,
-      headline,
-      windowSize,
       modules: [Grid, Pagination, Navigation]
     };
   },
